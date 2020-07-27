@@ -6,13 +6,8 @@
 trigger:
 - master
 
-jobs:
-- job: Windows
-  pool:
-   # vmImage: 'ubuntu-latest'
-    vmImage: 'windows-latest' 
-  steps:
-  - script: echo hello from Windows
+pool:
+  vmImage: 'windows-latest'
 
 variables:
   phpVersion: 7.2
@@ -22,9 +17,8 @@ variables:
   # when you created the web app using the Azure CLI
   appName: meredith-120072521000202
 
-
-
-
+steps:
+- script: echo hello from Windows
 
 - task: ArchiveFiles@1
   displayName: Archive files
@@ -37,7 +31,6 @@ variables:
   displayName: Publish Artifact
   inputs:
     PathtoPublish: $(build.artifactstagingdirectory)
-
 
 - task: AzureRmWebAppDeployment@4
   displayName: Azure Web App Deploy
